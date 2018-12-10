@@ -1,0 +1,21 @@
+{
+  "name": "json-to-xlsx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "bin/www"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "exceljs": "^1.6.3",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.0.0",
+    "normalize-port": "^1.0.0",
+    "uniqid": "^5.0.3"
+  }
+}

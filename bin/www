@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+'use strict'
+
+require('dotenv').config()
+const app = require('../app')
+const http = require('http')
+const normalizePort = require('normalize-port')
+
+const PORT = normalizePort(process.env.PORT || '3000')
+
+const server = http.createServer(app)
+
+server.listen(PORT, () => {
+	console.log(`Running on :${PORT}`)
+})
