@@ -4,6 +4,7 @@ const excel = require('exceljs')
 const uniqid = require('uniqid')
 const cors = require('cors')
 const fs = require('fs')
+const XLSX = require('xlsx');
 
 const app = express()
 
@@ -48,5 +49,37 @@ app.post('/xlsx', (req, res) => {
 	});
 })
 
+app.post('/json', (req, res) => {
 
-module.exports = app
+	//TODO handle invalid file format
+	const file = req.files.document;
+
+	//TODO handle duplicated id and insufficient memory space
+	const filename = `./files/xlsx/${uniqid()}.xlsx`;
+
+	file.mv(filename,(error) => {
+		if (error)
+			return res.status(500).send(error);
+
+		//TODO handle not found file error here
+		const workbook = XLSX.readFile(filename,  {sheetStubs: true});
+
+		const sheet_name_list = workbook.SheetNames;
+		let jsonPagesArray = [];
+		sheet_name_list.forEach(function(sheet) {
+				const jsonPage = {
+					name: sheet,
+					content: XLSX.utils.sheet_to_json(workbook.Sheets[sheet], {defval:""})
+				};
+				jsonPagesArray.push(jsonPage);
+			});
+		res.json(
+			{
+				data:jsonPagesArray
+			}
+		);
+		});
+	});
+
+module.exports = app;
+

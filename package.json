@@ -16,6 +16,7 @@
     "express": "^4.16.4",
     "express-fileupload": "^1.0.0",
     "normalize-port": "^1.0.0",
-    "uniqid": "^5.0.3"
+    "uniqid": "^5.0.3",
+    "xlsx": "^0.14.1"
   }
 }
